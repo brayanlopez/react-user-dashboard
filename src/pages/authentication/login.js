@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -13,10 +14,9 @@ import {
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { NavLink } from "react-router-dom";
 // import store from "redux";
 
-let Login = () => {
+const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -32,13 +32,13 @@ let Login = () => {
 
   return (
     <Container
+      maxWidth={false}
       sx={{
         display: "flex",
         alignItems: "center",
         height: "100vh",
         width: "100vw",
-        backgroundImage:
-          "url(https://source.unsplash.com/random?orientation=landscape)",
+        backgroundImage: `url(${process.env.REACT_APP_API_PICTURES})`,
         backgroundRepeat: "no-repeat",
         backgroundColor: (t) =>
           t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],

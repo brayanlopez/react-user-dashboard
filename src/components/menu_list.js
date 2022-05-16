@@ -6,7 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const MenuList = ({ items = [], secondaryItems = [] }) => (
   <List
@@ -20,7 +20,7 @@ export const MenuList = ({ items = [], secondaryItems = [] }) => (
   >
     <div>
       {items.map((item, key) => (
-        <ListItemButton key={key}>
+        <ListItemButton key={`li-${key}`}>
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText primary={item.label} />
         </ListItemButton>
@@ -30,7 +30,7 @@ export const MenuList = ({ items = [], secondaryItems = [] }) => (
     {secondaryItems.length > 0 ? (
       <div>
         {secondaryItems.map((item, key) => (
-          <Link key={key} to={item.path} className="link-undecorated">
+          <Link key={`si-${key}`} to={item.path} className="link-undecorated">
             <ListItemButton>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.label} />

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Box,
   Button,
@@ -7,7 +8,6 @@ import {
   Divider,
   Grid,
   IconButton,
-  Paper,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -17,29 +17,40 @@ import { styled } from "@mui/material/styles";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { MenuList } from "../components/menu_list";
-
 import ArticleIcon from "@mui/icons-material/Article";
-import ListAltIcon from "@mui/icons-material/ListAlt";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import PanoramaIcon from "@mui/icons-material/Panorama";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import PersonIcon from "@mui/icons-material/Person";
+
+import UserCard from "../components/user_card";
+import { MenuList } from "../components/menu_list";
+import { getUsersAsync, showUsers } from "../redux-slices/users";
 
 const menuItems = [
+  { icon: <PersonIcon />, label: "Users" },
   { icon: <ArticleIcon />, label: "Posts" },
   { icon: <PanoramaIcon />, label: "Pictures" },
-  { icon: <ListAltIcon />, label: "Todos" },
+  { icon: <FormatListBulletedIcon />, label: "Todos" },
 ];
 const secondaryMenuItems = [
   { icon: <SettingsIcon />, label: "Settings", path: "/login" },
   { icon: <ExitToAppIcon />, label: "Exit", path: "/login" },
 ];
 
-export function Dashboard({ name }) {
-  const [open, setOpen] = React.useState(false);
+function Dashboard({ name }) {
+  let users = useSelector(showUsers);
+  let dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    dispatch(getUsersAsync());
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -117,36 +128,21 @@ export function Dashboard({ name }) {
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}
-              >
-                {/* <Chart /> */}
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}
-              >
-                {/* <Deposits /> */}
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                {/* <Orders /> */}
-              </Paper>
+            <Grid
+              item
+              xs={12}
+              md={12}
+              lg={12}
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 3,
+                flexDirection: "row",
+              }}
+            >
+              {users.map((item, index) => {
+                return <UserCard key={`card-${index}`} />;
+              })}
             </Grid>
           </Grid>
         </Container>
@@ -200,3 +196,5 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
+export default Dashboard;
