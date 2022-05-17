@@ -126,24 +126,19 @@ function Dashboard({ name }) {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid
-              item
-              xs={12}
-              md={12}
-              lg={12}
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 3,
-                flexDirection: "row",
-              }}
-            >
-              {users.map((item, index) => {
-                return <UserCard key={`card-${index}`} />;
-              })}
-            </Grid>
+          <Grid
+            container
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 3,
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            {users.map((item, index) => (
+              <UserCard key={`card-${index}`} item={item} />
+            ))}
           </Grid>
         </Container>
       </Box>
