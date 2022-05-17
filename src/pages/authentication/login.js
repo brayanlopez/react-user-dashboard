@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Box,
@@ -14,9 +14,11 @@ import {
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-// import store from "redux";
 
 const Login = () => {
+  const [isLoginDisabled, setIsLoginDisabled] = useState(true);
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,10 +27,8 @@ const Login = () => {
       password: data.get("password"),
       remember: data.get("remember"),
     });
+    navigate("/dashboard");
   };
-
-  // let currentState = store.getState();
-  // console.log(currentState);
 
   return (
     <Container
@@ -104,16 +104,15 @@ const Login = () => {
               control={<Checkbox value={true} color="primary" />}
               label="Remember me"
             />
-            <NavLink to={"/dashboard"} className="link-undecorated">
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign in
-              </Button>
-            </NavLink>
+            <Button
+              disabled={isLoginDisabled}
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign in
+            </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
