@@ -16,7 +16,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const Login = () => {
-  const [isLoginDisabled, setIsLoginDisabled] = useState(true);
+  const [isLoginDisabled, setIsLoginDisabled] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
