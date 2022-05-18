@@ -1,14 +1,13 @@
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter, Route } from "react-router-dom";
 import { Login } from "../../../pages/authentication/login";
 
 describe("Screen prints at login", () => {
   const loginComponent = (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
+    <MemoryRouter initialEntries={["/"]}>
+      {/* <Route exact path="/" element={<Login />} /> */}
+      <Login />
+    </MemoryRouter>
   );
   test("should print Sign in", () => {
     render(loginComponent);
