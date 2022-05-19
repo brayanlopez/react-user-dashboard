@@ -51,7 +51,11 @@ export default function UserCard({ item }) {
           }}
         >
           <MailOutlineIcon color="primary" />
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ margin: "0 0 0 10px" }}
+          >
             {email}
           </Typography>
         </Box>
@@ -62,7 +66,11 @@ export default function UserCard({ item }) {
           }}
         >
           <PhoneAndroidIcon color="primary" />
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ margin: "0 0 0 10px" }}
+          >
             {phone}
           </Typography>
         </Box>
@@ -73,7 +81,11 @@ export default function UserCard({ item }) {
           }}
         >
           <LanguageIcon color="primary" />
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ margin: "0 0 0 10px" }}
+          >
             <Link
               href={`https:${website}`}
               color="inherit"
