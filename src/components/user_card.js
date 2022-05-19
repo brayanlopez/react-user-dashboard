@@ -14,8 +14,6 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import LanguageIcon from "@mui/icons-material/Language";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-// import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-// import EditIcon from "@mui/icons-material/Edit";
 
 export default function UserCard({ item }) {
   const { name, username, email, phone, website } = item;

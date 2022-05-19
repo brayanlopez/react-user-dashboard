@@ -14,38 +14,40 @@ import {
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import ImageContainer from "../../components/image_container";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux-slices";
 
+let email, password;
 const Login = () => {
-  const [isLoginDisabled, setIsLoginDisabled] = useState(false);
+  const [isLoginDisabled, setIsLoginDisabled] = useState(true);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      remember: data.get("remember"),
-    });
-    navigate("/dashboard");
+    const formData = new FormData(event.currentTarget);
+    if (
+      formData.get("email") === "admin" &&
+      formData.get("password") === "admin"
+    ) {
+      dispatch(login());
+      navigate("/dashboard");
+    }
+  };
+
+  const validateFields = () => {
+    if (email === undefined || password === undefined) {
+      setIsLoginDisabled(true);
+    } else if (email !== "" && password !== "") {
+      setIsLoginDisabled(false);
+    } else {
+      setIsLoginDisabled(true);
+    }
   };
 
   return (
-    <Container
-      maxWidth={false}
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        height: "100vh",
-        width: "100vw",
-        backgroundImage: `url(${process.env.REACT_APP_API_PICTURES})`,
-        backgroundRepeat: "no-repeat",
-        backgroundColor: (t) =>
-          t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <ImageContainer>
       <Container
         component="main"
         maxWidth="xs"
@@ -75,7 +77,7 @@ const Login = () => {
           <Box
             component="form"
             onSubmit={handleSubmit}
-            noValidate
+            onChange={validateFields}
             sx={{ mt: 1 }}
           >
             <TextField
@@ -87,6 +89,11 @@ const Login = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => {
+                email = e.target.value;
+              }}
+              error={email === ""}
+              helperText={email === "" ? "Please write your email" : ""}
             />
             <TextField
               margin="normal"
@@ -97,6 +104,11 @@ const Login = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => {
+                password = e.target.value;
+              }}
+              error={password === ""}
+              helperText={password === "" ? "Please write your password" : ""}
             />
             <FormControlLabel
               name="remember"
@@ -128,7 +140,7 @@ const Login = () => {
           </Box>
         </Box>
       </Container>
-    </Container>
+    </ImageContainer>
   );
 };
 

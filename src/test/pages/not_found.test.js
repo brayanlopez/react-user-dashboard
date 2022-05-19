@@ -1,3 +1,4 @@
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "../../pages/not_found";
