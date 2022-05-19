@@ -82,9 +82,6 @@ function Dashboard({ name }) {
           >
             Welcome {name}
           </Typography>
-          {/* <IconButton sx={{ color: "red" }}>
-            <ExitToAppIcon />
-          </IconButton> */}
         </Toolbar>
       </AppBar>
 
@@ -128,16 +125,15 @@ function Dashboard({ name }) {
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid
             container
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 3,
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
+            spacing={4}
+            direction="row"
+            justifyContent="center"
+            rowSpacing={2}
           >
             {users.map((item, index) => (
-              <UserCard key={`card-${index}`} item={item} />
+              <Grid item xs={10} sm={6} md={4} lg={3} key={`card-${index}`}>
+                <UserCard item={item} />
+              </Grid>
             ))}
           </Grid>
         </Container>

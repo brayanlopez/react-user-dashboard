@@ -18,7 +18,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 export default function UserCard({ item }) {
   const { name, username, email, phone, website } = item;
   return (
-    <Card sx={{ maxWidth: 320 }}>
+    <Card sx={{ width: "100%" }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
