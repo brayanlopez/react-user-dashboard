@@ -17,6 +17,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import ImageContainer from "../../components/image_container";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux-slices";
+import { MAIN_ROUTE } from "../../App";
 
 let email, password;
 const Login = () => {
@@ -29,10 +30,10 @@ const Login = () => {
     const formData = new FormData(event.currentTarget);
     if (
       formData.get("email") === "admin" &&
-      formData.get("password") === "admin"
+      formData.get("password") === "12345"
     ) {
       dispatch(login());
-      navigate("/dashboard");
+      navigate(`${MAIN_ROUTE}/dashboard`);
     }
   };
 

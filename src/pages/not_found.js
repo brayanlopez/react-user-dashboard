@@ -1,12 +1,13 @@
 import { Button, Container, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { MAIN_ROUTE } from "../App";
 
 export default function NotFound() {
   const navigate = useNavigate();
 
   const onclick = () => {
-    navigate("/");
+    navigate(MAIN_ROUTE);
   };
 
   return (
